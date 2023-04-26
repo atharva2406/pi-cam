@@ -37,4 +37,4 @@ app.use(function (err, req, res, next) {
   next(err);
 })
 
-app.listen(80, () => console.log('Server started on 80'));
+app.listen(8080, () => console.log('Server started on 8080'));
