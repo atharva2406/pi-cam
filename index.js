@@ -28,7 +28,6 @@ const wss = require('express-ws')(app);
         updateLeds();
         videoStream.removeAllListeners('data');
     });
-});
 
 
 
