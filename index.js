@@ -9,8 +9,11 @@ const raspividStream = require('raspivid-stream');
 const app = express();
 const wss = require('express-ws')(app);
 
+app.get('/', (req, res) => res.sendFile(__dirname + '/index.html'));
 
-
+app.ws('/video-stream', (ws, req) => {
+    console.log('Client connected');
+  
     ws.send(JSON.stringify({
       action: 'init',
       width: '960',
@@ -25,15 +28,13 @@ const wss = require('express-ws')(app);
 
     ws.on('close', () => {
         console.log('Client left');
-        updateLeds();
         videoStream.removeAllListeners('data');
     });
-
-
+});
 
 app.use(function (err, req, res, next) {
   console.error(err);
   next(err);
 })
 
-app.listen(8080, () => console.log('Server started on 8080'));
+app.listen(80, () => console.log('Server started on 80'));
